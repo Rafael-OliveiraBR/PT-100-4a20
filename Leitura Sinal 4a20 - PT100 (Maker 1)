@@ -1,0 +1,62 @@
+/*
+ * 28/04/2020
+ * Aplicação para leitura de sinal 4 - 20mA 
+ * através de um resistor de 250 Ohms nas entradas 
+ * analógicas que leem tensão entre 1V à 5V.
+ * 
+ * || Corrente ||    Tensão   ||    ADC    ||  Temperatura ||
+ * ------------------------------------------------------------
+ * ||  4 mA    ||     1 V     ||    205    ||    -50 C     ||
+ * ||  20 mA   ||     5 V     ||   1023    ||    +400 C    ||
+ *  
+ * O valor de temperatura obtido é enviado atavés da porta Serial 
+ * até o software SCADA para visualização.
+ * 
+ *  AUTORES:
+ *  Rafael Santos de Oliveira
+ *  Yuri Ariel da Silva
+ *
+ */
+
+
+/********************
+      VÁRIAVEIS
+********************/      
+const int AnalogInput = A0; // Entradas analógicas onde os resistores estão colocados
+int sensorValue = 0;
+int temperatura = 0;
+int ReceivedByte = 0;
+float f1 = 0;
+float t1 = 0;
+
+
+void setup() {
+  // Inicializa comunicação Serial
+  Serial.begin(9600);
+
+}
+
+void loop() {
+
+ // Verifica recebimento da informação
+ // (Checagem de comunicação)
+ if(Serial.available() > 0){
+ ReceivedByte = Serial.read();
+
+   // Leitura ADC (conversor analógico/digital)
+    sensorValue = analogRead(AnalogInput);
+
+   // mapeamento de sinais (multiplicado por 10 para valores decimais, porque map() não funciona com floats)
+    temperatura = map(sensorValue, 205, 1023, -500, 1500);
+    
+    f1 = temperatura;                   // Conversão Float
+    t1 = f1 / 10.0;                     // divide por 10 com valor decimal
+                                       
+   // Imprime temperatura na porta Serial 
+   Serial.print(t1);
+   Serial.print("\n");
+
+ }
+
+
+}
