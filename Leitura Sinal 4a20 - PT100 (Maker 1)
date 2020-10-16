@@ -12,9 +12,9 @@
  * O valor de temperatura obtido é enviado atavés da porta Serial 
  * até o software SCADA para visualização.
  * 
- *  AUTORES:
+ *  AUTOR:
  *  Rafael Santos de Oliveira
- *  Yuri Ariel da Silva
+ *  
  *
  */
 
