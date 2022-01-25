@@ -22,7 +22,7 @@
 /********************
       VÁRIAVEIS
 ********************/      
-const int AnalogInput = A0; // Entradas analógicas onde os resistores estão colocados
+const int AnalogInput = A0; // Entrada analógica onde os resistores estão colocados
 int sensorValue = 0;
 int temperatura = 0;
 int ReceivedByte = 0;
@@ -37,6 +37,7 @@ void setup() {
 }
 
 void loop() {
+
 
  // Verifica recebimento da informação
  // (Checagem de comunicação)
